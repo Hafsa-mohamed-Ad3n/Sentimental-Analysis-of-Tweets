@@ -4,9 +4,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
-import joblibp
+import joblib
 import re
-
 # Data Preprocessing (simplified)
 def preprocess_data():
     # Load your data
