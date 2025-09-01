@@ -32,7 +32,7 @@ We used [Notion](https://www.notion.so/Tweet-Sentiment-Analysis-25fdb8fbd6cf801b
      - Removing URLs, user mentions, hashtags, numbers, and special characters
      - Perform tokenization, stop-word removal, lemmatization, and stemming on the text data.  
      - Encoded target variable and vectorized feature matrix for machine learning.
-     - PIPELINE( Ryan?????)  
+     - Building pipeline to combine preprocessing, feature extraction, and modeling into a single reproducible process.
 
 - Model Selection & Deplyoment.     
      - Build an Natural Language Processing (NLP) model to analyze Twitter sentiment about Apple and Google products.
