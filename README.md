@@ -54,6 +54,9 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
       - Reviewed the balance of sentiment categories, since skewed classes may bias the model toward majority classes.
       - Explored brand distribution and compared tweets related to Apple vs. Google to see if one brand dominates the dataset.
 
+![Sentiment Distribution](Image/Sentiment%20Distribution.png)
+![Brand Distribution](Image/Brand%20Distribution.png)
+
 ### Data Preprocessing
 
 - To prepare the tweets for modeling, we applied several text-cleaning and transformation steps:
@@ -73,6 +76,8 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 - These allowed our models to better capture the semantic and syntactic patterns of the tweets.
 
+![Feature Engineering](Image/Feature%20Engineering.png)
+
 ### Pipelines
 
 - We built pipelines to combine preprocessing, feature extraction, and modeling into a single reproducible process. This ensured:
@@ -81,22 +86,66 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
      
 ### Modeling
 
-- We evaluated five ML classifiers using TF-IDF features extracted from the tweets:
-     - Logistic Regression → 69%
-     - Naive Bayes → 62%
-     - Support Vector Machine (SVM) → 68%
-     - Random Forest → 65%
-     - XGBoost → 66%
+- The model building process for this project was carried out in four main steps:
+   - Data preparation:
+      - Features (X): The text of each tweet (tweet_text).
+      - Target (y): Whether an emotion was directed at a brand (is_there_an_emotion_directed_at_a_brand_or_product).
+      - The dataset was split into training (80%) and testing (20%) sets.
 
-- From the initial comparison, Logistic Regression and Support Vector Machine (SVM) emerged as the top performers. We then fine-tuned both models using GridSearchCV to optimize hyperparameters.
+   - Baseline Model Comparison - We tested three ML classifiers to establish baseline performance:
+      - Logistic Regression
+      - Support Vector Machine (SVM)
+      - Random Forest
 
-- We selected Logistic Regression as our model of choice because it provided the best balance of performance and simplicity:
-     - Consistently accurate across sentiment classes
-     - Efficient & fast to train compared to SVM and ensemble methods
-     - Robust generalization with minimal overfitting
+   - Each model was trained on the preprocessed training data and evaluated on the test set. Key metrics included:
+      - Accuracy
+      - Precision, Recall, F1-score (per class)
+      - Classification reports
 
-  
-## Conclusion & Recommendations
+   - To better understand the performance of the model:
+      - We plotted Bar charts showing accuracy scores for all models for comparisons.
+      - Heatmaps for each model to visualize prediction errors across classes.
+      - Detailed breakdown of Logistic Regression performance (precision, recall, F1).
+
+   - We performed hyperparameter optimization using GridSearchCV for the two strongest text classification models
+   - The grid search was performed with 5-fold cross-validation, selecting the best parameters based on accuracy.
+
+### Observation
+
+- Model Performance:
+   - Among the baseline models, Logistic Regression achieved the highest accuracy (~70%) and overall balanced performance across classes.
+   - Linear Support Vector Machine performed slightly lower (~68%) but showed comparable results.
+   - Random Forest underperformed (~63%), struggling particularly with minority classes.
+
+- After Hyperparameter Tuning:
+   - Both Logistic Regression and Linear SVM converged to similar performance (~65% accuracy), but showed improved recall for the Negative emotion class.
+   - Performance on the “I can’t tell” class remained poor across all models, likely due to class imbalance and limited training samples.
+
+| Model                     | Accuracy |
+| --------------------------| -------- | 
+| Logistic Regression       | 0.70     |
+| Linear SVM                | 0.68     |
+| Random Forest             | 0.63     |
+| Tuned Logistic Regression | 0.65     | 
+| Tuned Linear SVM          | 0.65     |
 
 
+![Classification Heatmap](Image/Classification%20Heatmap.png)
+
+![Model Accuracy Comparison](Image/Model%20Accuracy%20Comparison.png)
+
+![Model Comparison](Image/Model%20Comparison.png)
+
+
+### Recommendations:
+
+- The model can be applied to track customer emotions and opinions towards the company’s products helping to capture market sentiment in real time.
+- By connecting the model to Twitter's APIs the company can automatically filter tweets mentioning the brand or competitors and classify them into sentiment categories.
+- Positive sentiment can be amplified in marketing campaigns to highlight brand strengths while the negative sentiment should be flagged for further analysis, enabling the company to identify pain points and potential areas for product or service improvement.
+- Insights from competitor related tweets can help the company understand what customers value in rival products and adapt strategies accordingly.
+
+
+### Future Improvement
+- Explore more advanced Modeling approaches like BERT for richer text representations beyond TF-IDF.
+- Implement a feedback loop to retrain the model with newly collected tweets, ensuring it adapts to evolving language such as slang, new product references, and emojis.
 
