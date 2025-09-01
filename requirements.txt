@@ -5,3 +5,8 @@ scikit-learn
 joblib
 numpy
 scipy
+pandas
+flask
+nltk
+chardet
+
