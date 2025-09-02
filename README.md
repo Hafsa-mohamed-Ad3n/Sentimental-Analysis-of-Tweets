@@ -32,7 +32,7 @@ We used [Notion](https://www.notion.so/Tweet-Sentiment-Analysis-25fdb8fbd6cf801b
      - Removing URLs, user mentions, hashtags, numbers, and special characters
      - Perform tokenization, stop-word removal, lemmatization, and stemming on the text data.  
      - Encoded target variable and vectorized feature matrix for machine learning.
-     - Building pipeline to combine preprocessing, feature extraction, and modeling into a single reproducible process.
+     - Building pipeline to combine preprocessing, feature extraction, and modelling into a single reproducible process.
 
 - Model Selection & Deplyoment.     
      - Build an Natural Language Processing (NLP) model to analyze Twitter sentiment about Apple and Google products.
@@ -43,13 +43,13 @@ We used [Notion](https://www.notion.so/Tweet-Sentiment-Analysis-25fdb8fbd6cf801b
 
 ### Data Source.
 
-The dataset used in this project comes from [CrowdFlower](https://data.world/crowdflower/brands-and-product-emotions) and contains over 9,000 tweets, each labeled by human raters as expressing a positive, negative, or neutral sentiment.
+The dataset used in this project comes from [CrowdFlower](https://data.world/crowdflower/brands-and-product-emotions) and contains over 9,000 tweets, each labelled by human raters as expressing a positive, negative, or neutral sentiment.
 
 ### Exploratory Data Analysis (EDA)
 
 - In order to better understand the dataset and prepare it for sentiment analysis, we focused on the following checks:
       - Preview the data: Inspect the first few rows to quickly grasp the dataset’s structure.
-      - Handled any missing data that could introduce bias or cause issues during preprocessing and modeling.
+      - Handled any missing data that could introduce bias or cause issues during preprocessing and modelling.
       - Removed duplicated tweets to prevent overrepresentation of certain entries.
       - Reviewed the balance of sentiment categories, since skewed classes may bias the model toward majority classes.
       - Explored brand distribution and compared tweets related to Apple vs. Google to see if one brand dominates the dataset.
@@ -59,7 +59,7 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 ### Data Preprocessing
 
-- To prepare the tweets for modeling, we applied several text-cleaning and transformation steps:
+- To prepare the tweets for modelling, we applied several text-cleaning and transformation steps:
      - Text Cleaning: Remove URLs, user mentions, hashtags, numbers, and special characters.
      - Tokenization: Break sentences into words for analysis.
      - Stop-word Removal: Exclude common words (the, and, is) that add little meaning.
@@ -80,11 +80,11 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 ### Pipelines
 
-- We built pipelines to combine preprocessing, feature extraction, and modeling into a single reproducible process. This ensured:
+- We built pipelines to combine preprocessing, feature extraction, and modelling into a single reproducible process. This ensured:
      - Consistency across training and testing
      - Simplified experimentation with different models
      
-### Modeling
+### Modelling
 
 - The model building process for this project was carried out in four main steps:
    - Data preparation:
@@ -97,7 +97,7 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
       - Support Vector Machine (SVM)
       - Random Forest
 
-   - Each model was trained on the preprocessed training data and evaluated on the test set. Key metrics included:
+   - Each model was trained on the pre-processed training data and evaluated on the test set. Key metrics included:
       - Accuracy
       - Precision, Recall, F1-score (per class)
       - Classification reports
@@ -136,6 +136,24 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 ![Model Comparison](Image/Model%20Comparison.png)
 
+### Deployment Overview
+
+- We deployed our sentiment analysis model so it can be used outside the notebook environment and accessed by different types of users.
+   - The trained model pipeline (TF-IDF + classifier + label encoder) was saved in a reusable format to ensure predictions remain consistent every time.
+   - The model logic was kept separate from the serving layer, making the system easier to manage and update.
+
+- We provided two ways to interact with the model:
+   - Flask Web App→ website where users can enter text and immediately see the sentiment prediction. This was designed for demonstrations and quick reviews.
+   - FastAPI → an API that allows developers to send text to the model and get results programmatically. It includes automatic documentation, making integration straightforward.
+
+- The model is hosted on Render which is connected to our GitHub repository. This means that whenever we push updates to GitHub, Render automatically rebuilds and redeploys the service. This avoids manual server setup and ensures the service is always up to date.
+
+- This setup allows:
+    - End-users → to interact with the model through the web interface.
+    - Developers → to integrate the model into their applications via the API.
+    - Future scaling → the system can grow as demand increases.
+
+Overall, deploying the model moved the project from experimentation to real-world use, balancing simplicity and performance.
 
 ### Recommendations:
 
@@ -146,6 +164,6 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 
 ### Future Improvement
-- Explore more advanced Modeling approaches like BERT for richer text representations beyond TF-IDF.
+- Explore more advanced Modelling approaches like BERT for richer text representations beyond TF-IDF.
 - Implement a feedback loop to retrain the model with newly collected tweets, ensuring it adapts to evolving language such as slang, new product references, and emojis.
 
