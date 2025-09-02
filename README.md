@@ -155,6 +155,8 @@ The dataset used in this project comes from [CrowdFlower](https://data.world/cro
 
 Overall, deploying the model moved the project from experimentation to real-world use, balancing simplicity and performance.
 
+[Live Demo on Render](https://deployment-yjiq.onrender.com/) 
+
 ### Recommendations:
 
 - The model can be applied to track customer emotions and opinions towards the company’s products helping to capture market sentiment in real time.
